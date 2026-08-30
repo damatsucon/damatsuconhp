@@ -266,6 +266,11 @@
       .publication-item-book{flex-direction:column;}
       .publication-cover{width:120px;}
     }
+    .publication-list-wide{grid-template-columns:1fr 1fr;}
+    .publication-list-wide .publication-item-journal{grid-column:1 / -1;}
+    @media (max-width: 860px){
+      .publication-list-wide{grid-template-columns:1fr;}
+    }
 
     .cta-section{padding:96px 0 110px;}
     .cta-panel{
@@ -368,8 +373,7 @@
       <a class="brand" href="#home" aria-label="ダーマツコンサルティング ホーム">
         <img class="brand-mark" src="images/damatsu-logo.png" alt="" aria-hidden="true" style="width: 43px; height: 43px;" />
         <span class="brand-text">
-          <span class="ja">ダーマツコンサルティング</span>
-          <span class="en">Shuji Matsuda Consulting Office</span>
+          <span class="ja">Da-matsu Consulting</span>
         </span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">
@@ -380,7 +384,8 @@
         <a href="#philosophy">仕事観</a>
         <a href="#services">支援内容</a>
         <a href="#achievements">実績</a>
-        <a href="#column">コラム</a>
+        <a href="#publications">著書・論文</a>
+        <a href="column.html" target="_blank" rel="noopener">コラム</a>
         <a href="#contact" class="cta">ご相談はこちら</a>
       </nav>
     </div>
@@ -650,59 +655,41 @@
                 <div class="timeline-item"><div class="year">講師</div><div class="text">中小企業大学校にて講師を担当</div></div>
                 <div class="timeline-item"><div class="year">支援機関</div><div class="text">中小企業基盤整備機構の事業に参加</div></div>
                 <div class="timeline-item"><div class="year">企業研修</div><div class="text">商工会議所および民間企業（上場企業ほか）における新入社員研修・人材育成研修を担当</div></div>
-                <div class="timeline-item"><div class="year">若手経営者育成</div><div class="text">青年中央会ビジネススクールにて、中小企業の若手経営者向けに経営・会計セミナーを開催</div></div>
                 <div class="timeline-item"><div class="year">連携事業</div><div class="text">戦略的大学連携支援プログラム「ビジネスマインド集中講座」担当、岡山県教育庁委託「ハイスクールカンパニー運営事業」に従事</div></div>
                 <div class="timeline-item"><div class="year">理事</div><div class="text">グローバルプレゼンテーション協会 理事として運営に参画</div></div>
               </div>
             </div>
 
-            <div class="achievement-card reveal">
-              <h4>著書・論文</h4>
-              <div class="publication-list">
-                <div class="publication-item publication-item-book">
-                  <a href="https://amzn.asia/d/0bgvLU1Y" target="_blank" class="publication-cover"><img src="images/casebook-chiiki-kigyo.jpg" alt="ケースブック地域企業の経営戦略" /></a>
-                  <div class="publication-text"><a href="https://amzn.asia/d/0bgvLU1Y" target="_blank"><b>『ケースブック地域企業の経営戦略』</b></a>（大学教育出版, 2010年）に、中小製造業の事業システムを扱ったケース教材2編（単著）と、海外子会社経営に関するケース教材1編（共著）を寄稿。</div>
-                </div>
-                <div class="publication-item"><b>「広告産業の発展と広告代理店」</b> 関西学院大学国際学部研究会『国際学研究』創刊号（2012年、共著）に掲載。</div>
-                <div class="publication-item publication-item-book">
-                  <a href="https://amzn.asia/d/08qKgso9" target="_blank" class="publication-cover"><img src="images/da-matsu-everywhere.jpg" alt="Da-matsu EVERYWHERE" /></a>
-                  <div class="publication-text"><a href="https://amzn.asia/d/08qKgso9" target="_blank"><b>『Da-matsu EVERYWHERE』</b></a> 普段は経営コンサルタントとして企業等組織の支援をしていますが、ブログでは、中小企業診断士ならぬ「少々キモイ珍男子」っぷりをおおいに発揮して、日々インプットしたことを整理しています。取り上げる内容は、そのままダーマツが、大学生向けのマーケティングの講義で使ってます。鋭い視点などなく、チャラさ満点。女子に叱られっぱなしの様子に、思わず「ダメなタイプぅ！」と言ってしまうでしょう。</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section column-area" id="column">
+    <section class="section" id="publications">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
-            <span class="eyebrow">Column</span>
-            <h2>コラム</h2>
+            <span class="eyebrow">Publications</span>
+            <h2>著書・論文</h2>
           </div>
-          <p>地域経済誌への寄稿や講演を通じて考えてきた経営の視点を、コラムとして発信しています。ここでは、地域経済誌『岡山経済』への寄稿記事「これからの中小企業経営」より、その一部を抜粋してご紹介します。</p>
+          <p>実務で得た知見は、ケース教材や論文というかたちでも発信してきました。</p>
         </div>
 
-        <article class="column-article reveal">
-          <span class="meta"><img src="images/column-meta-image.jpg" alt="" style="max-width:100%;" />岡山経済 寄稿 / 経営戦略</span>
-          <h3>これからの中小企業経営に、「戦略」は必要か。</h3>
-          <div class="column-body">
-            <div class="column-block">
-              <h4>「戦略」という言葉に、惑わされていないか。</h4>
-              <p>「戦略があれば大丈夫」——まるで魔法の杖のように語られがちな戦略という言葉。実は経営の文脈で使われ始めたのは、たかだか40数年前からです。単一の事業を営むことの多い中小企業において、経営課題の大半は、戦略以前に「当たり前のことをきちんとやり遂げる」オペレーション管理にあります。</p>
-            </div>
-            <div class="column-block">
-              <h4>戦略は「策定する」ものか、「形成される」ものか。</h4>
-              <p>分析し、計画し、策定する——そうした整った戦略づくりが、現実にはうまく機能しないことも少なくありません。中小企業の事例に見る、まず行動し、試行錯誤のなかで学びながら戦略が「形成されていく」というプロセスについて書きました。</p>
-            </div>
-            <div class="column-block">
-              <h4>むすび——狙って撃つ、から、撃って狙う、へ。</h4>
-              <p>環境変化の激しい時代、机上で戦略を練り上げることよりも大切なのは、明確な将来像とオペレーション管理を土台にしながら、まず行動を起こし、その過程での学びを次につなげていく姿勢です。「狙って撃つ」から「撃て！（その後）狙え！」への発想転換を提案しました。</p>
-            </div>
+        <div class="publication-list publication-list-wide reveal">
+          <div class="publication-item publication-item-book">
+            <a href="https://amzn.asia/d/0bgvLU1Y" target="_blank" class="publication-cover"><img src="images/casebook-chiiki-kigyo.jpg" alt="ケースブック地域企業の経営戦略" /></a>
+            <div class="publication-text"><a href="https://amzn.asia/d/0bgvLU1Y" target="_blank"><b>『ケースブック地域企業の経営戦略』</b></a>（大学教育出版, 2010年）に、中小製造業の事業システムを扱ったケース教材2編（単著）と、海外子会社経営に関するケース教材1編（共著）を寄稿。</div>
           </div>
-        </article>
+          <div class="publication-item publication-item-book">
+            <a href="https://amzn.asia/d/08qKgso9" target="_blank" class="publication-cover"><img src="images/da-matsu-everywhere.jpg" alt="Da-matsu EVERYWHERE" /></a>
+            <div class="publication-text"><a href="https://amzn.asia/d/08qKgso9" target="_blank"><b>『Da-matsu EVERYWHERE』</b></a> 普段は経営コンサルタントとして企業等組織の支援をしていますが、ブログでは、中小企業診断士ならぬ「少々キモイ珍男子」っぷりをおおいに発揮して、日々インプットしたことを整理しています。取り上げる内容は、そのままダーマツが、大学生向けのマーケティングの講義で使ってます。鋭い視点などなく、チャラさ満点。女子に叱られっぱなしの様子に、思わず「ダメなタイプぅ！」と言ってしまうでしょう。</div>
+          </div>
+          <div class="publication-item publication-item-journal"><b>「広告産業の発展と広告代理店」</b> 関西学院大学国際学部研究会『国際学研究』創刊号（2012年、共著）に掲載。</div>
+        </div>
+
+        <div class="reveal" style="text-align:center; margin-top:34px;">
+          <a href="column.html" target="_blank" rel="noopener" class="btn btn-secondary">コラムを読む</a>
+        </div>
       </div>
     </section>
 
@@ -712,7 +699,7 @@
           <div class="cta-grid">
             <div class="cta-copy">
               <span class="eyebrow" style="color:rgba(255,255,255,.72);">Contact</span>
-              <h2>まずは、<br>お気軽にご相談ください。</h2>
+              <h2>Contact</h2>
               <p>経営戦略の見直し、販路開拓の方向性整理、研修のご相談、補助金申請に向けた壁打ちまで。初期段階のご相談でも問題ありません。状況を伺いながら、進め方をご一緒に考えます。</p>
             </div>
             <div class="contact-info">
