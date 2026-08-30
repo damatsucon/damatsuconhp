@@ -75,6 +75,32 @@
       background:rgba(255,255,255,.46);
     }
 
+    .nav-toggle{
+      display:none; align-items:center; justify-content:center;
+      width:42px; height:42px; border-radius:12px; border:1px solid var(--line);
+      background:rgba(255,255,255,.5); flex-shrink:0; cursor:pointer;
+    }
+    .nav-toggle span{
+      position:relative; width:18px; height:2px; background:var(--ink);
+      transition:background .2s ease;
+    }
+    .nav-toggle span::before, .nav-toggle span::after{
+      content:''; position:absolute; left:0; width:18px; height:2px; background:var(--ink);
+      transition:transform .28s ease, top .28s ease, opacity .2s ease;
+    }
+    .nav-toggle span::before{top:-6px;}
+    .nav-toggle span::after{top:6px;}
+    .nav-open .nav-toggle span{background:transparent;}
+    .nav-open .nav-toggle span::before{top:0; transform:rotate(45deg);}
+    .nav-open .nav-toggle span::after{top:0; transform:rotate(-45deg);}
+
+    .nav-overlay{
+      position:fixed; inset:0; background:rgba(31,29,26,.4);
+      opacity:0; pointer-events:none; transition:opacity .3s ease; z-index:50;
+    }
+    .nav-open .nav-overlay{opacity:1; pointer-events:auto;}
+    body.nav-open{overflow:hidden;}
+
     .hero{padding:56px 0 34px;}
     .hero-shell{
       display:grid; grid-template-columns:1.08fr .92fr; gap:44px; align-items:stretch;
@@ -307,7 +333,22 @@
     @media (max-width: 860px){
       .wrap{width:min(var(--wrap), calc(100% - 30px));}
       .site-header .wrap{min-height:70px;}
-      .nav{gap:14px;}
+      .nav-toggle{display:inline-flex;}
+      .nav{
+        position:fixed; top:0; right:-320px; z-index:60;
+        width:min(320px, 84vw); height:100vh; height:100dvh;
+        background:var(--panel); box-shadow:-24px 0 60px rgba(30,28,24,.18);
+        flex-direction:column; align-items:stretch; flex-wrap:nowrap; gap:0;
+        padding:88px 28px 28px; overflow-y:auto;
+        transition:right .35s ease;
+      }
+      .nav-open .nav{right:0;}
+      .nav a{
+        font-size:16px; padding:16px 0; border-bottom:1px solid var(--line);
+      }
+      .nav .cta{
+        margin-top:22px; text-align:center; padding:14px 18px;
+      }
       .section{padding:74px 0;}
       .section-head{display:block; margin-bottom:24px;}
       .section-head p{margin-top:14px;}
@@ -330,7 +371,10 @@
           <span class="en">Shuji Matsuda Consulting Office</span>
         </span>
       </a>
-      <nav class="nav">
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="siteNav">
+        <span></span>
+      </button>
+      <nav class="nav" id="siteNav">
         <a href="#profile">プロフィール</a>
         <a href="#philosophy">仕事観</a>
         <a href="#services">支援内容</a>
@@ -339,6 +383,7 @@
         <a href="#contact" class="cta">ご相談はこちら</a>
       </nav>
     </div>
+    <div class="nav-overlay" id="navOverlay"></div>
   </header>
 
   <main id="home">
@@ -698,6 +743,28 @@
   </footer>
 
   <script>
+    (() => {
+      const toggle = document.getElementById('navToggle');
+      const overlay = document.getElementById('navOverlay');
+      const nav = document.getElementById('siteNav');
+      if (!toggle || !overlay || !nav) return;
+
+      const setOpen = (open) => {
+        document.body.classList.toggle('nav-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      };
+
+      toggle.addEventListener('click', () => {
+        setOpen(!document.body.classList.contains('nav-open'));
+      });
+      overlay.addEventListener('click', () => setOpen(false));
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add('in-view');
