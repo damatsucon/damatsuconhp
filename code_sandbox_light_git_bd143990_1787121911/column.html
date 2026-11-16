@@ -325,6 +325,7 @@
     .column-block p{color:var(--ink-soft); font-size:15px;}
     .column-block p + p{margin-top:12px;}
     .column-block + .column-block{padding-top:26px; border-top:1px solid rgba(31,29,26,.08);}
+    .column-hero{display:block; width:100%; height:auto; border-radius:20px; margin-bottom:30px;}
     .column-article + .column-article{margin-top:32px;}
     .column-article{scroll-margin-top:100px;}
     .column-index{display:grid; gap:0; margin-bottom:34px; border-top:1px solid var(--line);}
@@ -432,6 +433,8 @@
           <p>地域経済誌への寄稿や講演を通じて考えてきた経営の視点を、コラムとして発信しています。</p>
         </div>
 
+        <img class="column-hero" src="images/column-meta-image.jpg" alt="" />
+
         <nav class="column-index" aria-label="コラム一覧">
           <a href="#mondai"><span class="cat">経営計画 / 寄稿より</span><span class="ttl">答えを急ぐ前に、問題を読め</span><span class="go" aria-hidden="true">↓</span></a>
           <a href="#makikomi"><span class="cat">人材育成 / セミナー</span><span class="ttl">全員がリーダーになれるか ―「巻き込む力」という考え方</span><span class="go" aria-hidden="true">↓</span></a>
@@ -490,7 +493,7 @@
         </article>
 
         <article class="column-article reveal" id="senryaku">
-          <span class="meta"><img src="images/column-meta-image.jpg" alt="" style="max-width:100%;" />岡山経済 寄稿 / 経営戦略</span>
+          <span class="meta">岡山経済 寄稿 / 経営戦略</span>
           <h3>戦略を策定している場合ではない!?</h3>
           <div class="column-body">
             <div class="column-block">
