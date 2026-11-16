@@ -326,6 +326,19 @@
     .column-more a{font-size:13px; font-weight:600; color:var(--ink-soft); border-bottom:1px solid var(--line-strong); padding-bottom:2px; transition:.25s ease;}
     .column-more a:hover{color:var(--ink); border-color:var(--ink);}
 
+    .note-feed{margin-top:64px;}
+    .note-feed[hidden]{display:none;}
+    .note-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px;}
+    .note-card{display:flex; flex-direction:column; border-radius:24px; overflow:hidden; background:var(--panel); border:1px solid rgba(31,29,26,.08); box-shadow:0 14px 36px rgba(31,29,26,.05); transition:transform .25s ease, box-shadow .25s ease;}
+    .note-card:hover{transform:translateY(-3px); box-shadow:0 18px 44px rgba(31,29,26,.10);}
+    .note-thumb{display:block; width:100%; aspect-ratio:1.91 / 1; object-fit:cover; background:var(--bg-deep);}
+    .note-card-body{padding:20px 22px 22px; display:flex; flex-direction:column; gap:8px; flex:1;}
+    .note-date{font-size:11px; letter-spacing:.14em; color:var(--accent); font-weight:700;}
+    .note-title{font-size:16px; line-height:1.55; font-weight:600; color:var(--ink);}
+    .note-excerpt{font-size:13px; line-height:1.75; color:var(--ink-soft); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;}
+    @media (max-width: 1080px){ .note-grid{grid-template-columns:repeat(2, minmax(0,1fr));} }
+    @media (max-width: 860px){ .note-grid{grid-template-columns:1fr;} .note-feed{margin-top:48px;} }
+
     .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
     .reveal.in-view{opacity:1; transform:translateY(0);}
 
@@ -431,8 +444,19 @@
           </div>
         </article>
 
+        <div class="note-feed" id="noteFeed" hidden>
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Latest on note</span>
+              <h2>noteの最新記事</h2>
+            </div>
+            <p>新聞記事を手がかりに、経営学や時事の背景を読み解くコラムを note で発信しています。最新の記事をご紹介します。</p>
+          </div>
+          <div class="note-grid" id="noteGrid"></div>
+        </div>
+
         <div class="column-more reveal">
-          <a href="https://note.com/damatsucon" target="_blank" rel="noopener">note で続きのコラムを読む →</a>
+          <a href="https://note.com/damatsucon" target="_blank" rel="noopener">note でコラムをもっと読む →</a>
         </div>
       </div>
     </section>
@@ -474,6 +498,78 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // noteの最新記事（RSSをNetlifyの転送機能 /note-rss 経由で取得）。取得できない場合は欄ごと非表示のまま。
+    (async () => {
+      const feed = document.getElementById('noteFeed');
+      const grid = document.getElementById('noteGrid');
+      if (!feed || !grid) return;
+      const MAX_ITEMS = 6;
+      try {
+        const res = await fetch('/note-rss', { cache: 'no-store' });
+        if (!res.ok) return;
+        const xml = new DOMParser().parseFromString(await res.text(), 'text/xml');
+        if (xml.querySelector('parsererror')) return;
+        const text = (el, tag) => {
+          const n = el.getElementsByTagName(tag)[0];
+          return n ? n.textContent.trim() : '';
+        };
+        const items = Array.from(xml.getElementsByTagName('item')).slice(0, MAX_ITEMS);
+        items.forEach((item) => {
+          const link = text(item, 'link');
+          const title = text(item, 'title');
+          if (!title || !/^https:\/\/note\.com\//.test(link)) return;
+
+          const card = document.createElement('a');
+          card.className = 'note-card';
+          card.href = link;
+          card.target = '_blank';
+          card.rel = 'noopener';
+
+          const thumb = text(item, 'media:thumbnail');
+          if (/^https:\/\//.test(thumb)) {
+            const img = document.createElement('img');
+            img.className = 'note-thumb';
+            img.src = thumb;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.addEventListener('error', () => img.remove());
+            card.appendChild(img);
+          }
+
+          const body = document.createElement('div');
+          body.className = 'note-card-body';
+
+          const d = new Date(text(item, 'pubDate'));
+          if (!isNaN(d)) {
+            const date = document.createElement('span');
+            date.className = 'note-date';
+            date.textContent = d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+            body.appendChild(date);
+          }
+
+          const h = document.createElement('span');
+          h.className = 'note-title';
+          h.textContent = title;
+          body.appendChild(h);
+
+          const plain = (new DOMParser().parseFromString(text(item, 'description'), 'text/html').body.textContent || '')
+            .replace(/続きをみる\s*$/, '').replace(/\s+/g, ' ').trim();
+          if (plain) {
+            const ex = document.createElement('span');
+            ex.className = 'note-excerpt';
+            ex.textContent = plain;
+            body.appendChild(ex);
+          }
+
+          card.appendChild(body);
+          grid.appendChild(card);
+        });
+        if (grid.children.length) feed.hidden = false;
+      } catch (e) {
+        /* 取得に失敗した場合は何も表示しない */
+      }
+    })();
   </script>
 </body>
 </html>
