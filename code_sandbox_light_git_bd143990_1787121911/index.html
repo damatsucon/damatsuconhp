@@ -19,7 +19,11 @@
   <meta property="og:locale" content="ja_JP" />
   <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"ProfessionalService","name":"ダーマツコンサルティング","url":"https://dmtc-biz.com/","image":"https://dmtc-biz.com/images/ogp.jpg","founder":{"@type":"Person","name":"松田 周司","jobTitle":"中小企業診断士"},"address":{"@type":"PostalAddress","addressCountry":"JP","addressRegion":"岡山県","addressLocality":"岡山市北区"},"areaServed":"JP"}
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","@id":"https://dmtc-biz.com/#website","url":"https://dmtc-biz.com/","name":"ダーマツコンサルティング","alternateName":["松田周司 中小企業診断士事務所","Da-matsu Consulting"],"inLanguage":"ja","publisher":{"@id":"https://dmtc-biz.com/#org"}},
+    {"@type":"ProfessionalService","@id":"https://dmtc-biz.com/#org","name":"ダーマツコンサルティング","alternateName":["松田周司 中小企業診断士事務所","Da-matsu Consulting"],"url":"https://dmtc-biz.com/","image":"https://dmtc-biz.com/images/ogp.jpg","logo":"https://dmtc-biz.com/images/damatsu-logo.png","description":"中小企業診断士 松田周司による経営コンサルティング。経営戦略、販路開拓、人材育成、講演・研修、補助金活用を支援。","foundingDate":"1996","founder":{"@id":"https://dmtc-biz.com/#matsuda"},"address":{"@type":"PostalAddress","addressCountry":"JP","addressRegion":"岡山県","addressLocality":"岡山市北区"},"areaServed":"JP","knowsAbout":["経営戦略","経営計画","販路開拓","人材育成","創業支援","補助金活用","企業研修","リーダーシップ"]},
+    {"@type":"Person","@id":"https://dmtc-biz.com/#matsuda","name":"松田 周司","alternateName":["松田周司","まつだ しゅうじ"],"jobTitle":"中小企業診断士・経営コンサルタント","url":"https://dmtc-biz.com/","image":"https://dmtc-biz.com/images/hero-photo.jpg","worksFor":{"@id":"https://dmtc-biz.com/#org"},"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"中小企業診断士"},{"@type":"EducationalOccupationalCredential","name":"修士（経営学）"}],"alumniOf":[{"@type":"CollegeOrUniversity","name":"岡山大学大学院"},{"@type":"CollegeOrUniversity","name":"東京理科大学"}],"sameAs":["https://note.com/damatsucon"]}
+  ]}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -615,6 +619,9 @@
     .ach-map-wrap .map-list{text-align:center; font-size:14px;}
     .timeline-2col{display:grid; grid-template-columns:1fr 1fr; column-gap:48px;}
     .ach-panel .program{margin-top:0;}
+    .ach-more{margin-top:24px;}
+    .ach-more a{font-size:14px; font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,.5); padding-bottom:3px;}
+    .ach-more a:hover{border-color:#fff;}
     .ach-anchor{display:block; height:0; scroll-margin-top:110px;}
     @media (max-width: 860px){
       .timeline-2col{grid-template-columns:1fr;}
@@ -941,6 +948,7 @@
           <div class="ach-tags" aria-label="主な研修テーマ">
             <span>創業塾・創業フォロー</span><span>経営計画策定（生成AI活用）</span><span>補助金申請につながる事業計画</span><span>売れるものづくり・販路開拓</span><span>問題解決・ロジカルシンキング</span><span>巻き込み力・リーダーシップ</span><span>フォロワーシップ</span><span>タイムマネジメント</span><span>企画力・資料作成・プレゼンテーション</span><span>OJT・新入社員研修</span>
           </div>
+          <p class="ach-more"><a href="training.html">講演・研修テーマの一覧を見る →</a></p>
         </div>
 
         <div class="ach-panel" role="tabpanel" id="panel-history" aria-labelledby="tab-history">
